@@ -172,13 +172,12 @@ if (isset($_SESSION['toast'])) {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input type="text" name="studNo" readonly placeholder="Student Number" value="<?= htmlspecialchars($studentData['studNo']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-gray-300 placeholder-gray-400 transition" required readonly>
             <input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($studentData['email']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-gray-300 placeholder-gray-400 transition" required readonly>
+            <input type="text" name="courseCode" placeholder="Course" value="<?= htmlspecialchars($studentData['courseCode']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-gray-300 placeholder-gray-400 transition" required readonly>
+            <input type="text" name="yearSection" placeholder="Year & Section" value="<?= htmlspecialchars($studentData['yearSection']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-gray-300 placeholder-gray-400 transition" required readonly>
             <input type="text" name="studFname" placeholder="First Name" value="<?= htmlspecialchars($studentData['studFname']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition" required>
             <input type="text" name="studMname" placeholder="Middle Name" value="<?= htmlspecialchars($studentData['studMname']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition">
             <input type="text" name="studLname" placeholder="Last Name" value="<?= htmlspecialchars($studentData['studLname']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition" required>
-            
-            
-            <input type="text" name="courseCode" placeholder="Course" value="<?= htmlspecialchars($studentData['courseCode']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition" required>
-            <input type="text" name="yearSection" placeholder="Year & Section" value="<?= htmlspecialchars($studentData['yearSection']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition" required>
+
           </div>
 
           <div class="flex justify-end space-x-4 pt-4">
@@ -211,7 +210,7 @@ if (isset($_SESSION['toast'])) {
             <input type="text" name="proFname" placeholder="First Name" value="<?= htmlspecialchars($professorData['proFname']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition" required>
             <input type="text" name="proMname" placeholder="Middle Name" value="<?= htmlspecialchars($professorData['proMname']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition">
             <input type="text" name="proLname" placeholder="Last Name" value="<?= htmlspecialchars($professorData['proLname']) ?>" class="w-full border-b-2 border-black focus:border-yellow-500 focus:outline-none px-2 py-2 bg-transparent placeholder-gray-400 transition" required>
-            
+
           </div>
 
           <div class="flex justify-end space-x-4 pt-4">

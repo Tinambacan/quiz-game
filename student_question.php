@@ -113,13 +113,13 @@ $questions = $stmts->fetchAll(PDO::FETCH_ASSOC);
     const quizID = <?= (int) $quiz['quizID'] ?>;
 
     const questions = <?= json_encode(array_map(function ($q) {
-        return [
-            'category' => $q['quizTitle'],
-            'question' => $q['questionDesc'],
-            'options' => [$q['optionA'], $q['optionB'], $q['optionC'], $q['optionD']],
-            'answer' => ['A' => 0, 'B' => 1, 'C' => 2, 'D' => 3][substr($q['correctAnswer'], 0, 1)] ?? 0
-        ];
-    }, $questions), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+                            return [
+                                'category' => $q['quizTitle'],
+                                'question' => $q['questionDesc'],
+                                'options' => [$q['optionA'], $q['optionB'], $q['optionC'], $q['optionD']],
+                                'answer' => ['A' => 0, 'B' => 1, 'C' => 2, 'D' => 3][substr($q['correctAnswer'], 0, 1)] ?? 0
+                            ];
+                        }, $questions), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 
     const timerSetting = <?= (int) $quiz['timer'] ?>;
     const hasTimer = timerSetting > 0;
@@ -224,12 +224,24 @@ $questions = $stmts->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
+    let quizEnded = false; // ✅ Add this at the top
+
     function endGame() {
         if (hasTimer) clearInterval(timerInterval);
         localStorage.removeItem(`quizState_${quizID}_${studentID}`);
+        quizEnded = true; // ✅ Mark as completed
         saveScore(score, shuffledQuestions.length);
         showModal(score, shuffledQuestions.length);
     }
+
+    // ✅ Update the beforeunload listener
+    window.addEventListener('beforeunload', function(e) {
+        if (!quizEnded) {
+            e.preventDefault();
+            e.returnValue = 'You have an ongoing quiz. Are you sure you want to leave?';
+        }
+    });
+
 
     function saveScore(score, total) {
         if (!studentID) return;
@@ -238,7 +250,12 @@ $questions = $stmts->fetchAll(PDO::FETCH_ASSOC);
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ studentID, quizID, score, total })
+                body: JSON.stringify({
+                    studentID,
+                    quizID,
+                    score,
+                    total
+                })
             })
             .then(res => res.json())
             .then(data => {
@@ -300,11 +317,6 @@ $questions = $stmts->fetchAll(PDO::FETCH_ASSOC);
         btn.addEventListener('click', () => checkAnswer(index));
     });
 
-    // Warn before closing
-    window.addEventListener('beforeunload', function(e) {
-        e.preventDefault();
-        e.returnValue = 'You have an ongoing quiz. Are you sure you want to leave?';
-    });
 </script>
 
 
